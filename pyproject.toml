@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "verbot-api"
+version = "0.1.0"
+description = "API para verbot"
+authors = ["du2x <dudumonteiro@gmail.com>"]
+readme = "README.md"
+packages = [{include = "verbot_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = {extras = ["all"], version = "^0.95.1"}
+sqlmodel = "^0.0.8"
+dynaconf = "^3.1.12"
+alembic = "^1.10.4"
+psycopg2 = "^2.9.6"
+
+[tool.poetry.group.dev.dependencies]
+sdb = "^1.8"
+pytest = "^7.3.1"
+pytest-order = "^1.1.0"
+httpx = "^0.24.0"
+black = "^23.3.0"
+flake8 = "5.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,33 @@
+# Build the app image
+FROM python:3.8
+
+# Create the app user
+RUN groupadd app && useradd -m -g app app
+
+USER app
+
+# Create the home directory
+ENV APP_HOME=/home/app/api
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+
+# Configure Poetry
+ENV POETRY_VERSION=1.4.2
+ENV POETRY_HOME=/home/app/.poetry
+ENV POETRY_VENV=/home/app/.poetry-venv
+ENV POETRY_CACHE_DIR=/home/app/.poetry-cache
+
+
+# Install poetry separated from system interpreter
+RUN python3 -m venv $POETRY_VENV \
+    && $POETRY_VENV/bin/pip install -U pip setuptools \
+    && $POETRY_VENV/bin/pip install poetry==${POETRY_VERSION}
+
+# Add `poetry` to PATH
+ENV PATH="${PATH}:${POETRY_VENV}/bin"
+
+# Install dependencies
+COPY poetry.lock pyproject.toml ./
+RUN poetry install --no-root
+
+CMD ["poetry", "run", "uvicorn","verbot.app:app","--host=0.0.0.0","--port=8000","--reload"]

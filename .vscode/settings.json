@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/__pycache__": true,
+        "**/.factorypath": true
+    },
+}

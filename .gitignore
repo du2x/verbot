@@ -1,0 +1,10 @@
+.venv
+*.egg-info
+__pycache__
+**/__pycache__
+**/**/__pycache__
+**/**/**/__pycache__
+.secrets.toml
+docs/book
+util.txt
+
